@@ -1,5 +1,5 @@
 ---
-title: "Proposal title"
+title: ""
 subtitle: "Proposal"
 author: 
   - name: "Team Name - Team member 1, Team member 2,..."
@@ -19,18 +19,99 @@ execute:
 jupyter: python3
 ---
 
-```{python}
-#| label: load-pkgs
-#| message: false
-import numpy as np
-```
+# Libraries installed (Agent AI assisted with what libraries)
 
-## Dataset
+# Create & activate your environment (conda example)
+conda create -n epi_adhd python=3.10 -y
+conda activate epi_adhd
 
-```{python}
-#| label: load-dataset
-#| message: false
-```
+# Install core data manipulation & ML libraries
+pip install \
+  numpy \
+  pandas \
+  scipy \
+  scikit-learn \
+  matplotlib \
+  seaborn \
+  plotly \
+  jupyterlab
+
+# Install EEG-specific libraries
+pip install \
+  mne \
+  neurokit2
+
+# Install advanced ML & interpretability tools
+pip install \
+  xgboost \
+  lightgbm \
+  optuna \
+  shap \
+  imbalanced-learn
+
+# Install deep learning frameworks (optional stretch)
+pip install \
+  torch \
+  torchvision \
+  tensorflow
+
+# Install utilities for reproducible docs & dashboards
+pip install \
+  quarto-cli \
+  voila \
+  dash \
+  jupyterlab-nvdashboard
+
+# 7. (Optional) If you need to read/write Excel
+pip install \
+  openpyxl \
+  xlrd
+
+# Verify installation
+pip list
+
+## Dataset 1 (ADHD Motor Activity Dataset (OBF-Psychiatric)
+
+# Get data from website using wget
+wget -O data/OBF-Psychiatric-Dataset.zip \
+  "https://zenodo.org/record/13754984/files/OBF-Psychiatric%20Dataset.zip?download=1"
+# unzip data in codespace
+unzip data/OBF-Psychiatric-Dataset.zip -d data/OBF-Psychiatric-Dataset/
+# merge
+python - <<EOF
+import pandas as pd, glob, os
+pattern = os.path.join("data/OBF-Psychiatric-Dataset", "*.csv")
+files = glob.glob(pattern)
+dfs = []
+for f in files:
+    df = pd.read_csv(f)
+    df["subject_id"] = os.path.splitext(os.path.basename(f))[0]
+    dfs.append(df)
+combined = pd.concat(dfs, ignore_index=True)
+os.makedirs("data/merged", exist_ok=True)
+combined.to_csv("data/merged/ADHD_combined.csv", index=False)
+print("Saved data/merged/ADHD_combined.csv with", combined.shape[0], "rows")
+EOF
+
+# Dataset 2 (CHB-MIT Scalp EEG Database (epilepsy)
+
+# Get data from website using wget
+wget -r -N -c -np https://physionet.org/files/chbmit/1.0.0/ -P data/chbmit/
+# unzip data in codespace
+unzip data/chbmit/chbmit-1.0.0.zip -d data/chbmit/
+# list out files
+ls data/chbmit/chb01/*.edf | head -n 5
+# 4) Convert one EDF to FIF (MNE format) for faster loading
+python - <<EOF
+import mne, glob, os
+edf = glob.glob("data/chbmit/chb01/*.edf")[0]
+raw = mne.io.read_raw_edf(edf, preload=True)
+fif_out = edf.replace(".edf", ".fif").replace("/chbmit/", "/data/chbmit/preprocessed/")
+os.makedirs(os.path.dirname(fif_out), exist_ok=True)
+raw.save(fif_out, overwrite=True)
+print("Saved preprocessed FIF:", fif_out)
+EOF
+
 
 A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.
 
