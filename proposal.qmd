@@ -1,11 +1,11 @@
 ---
-title: ""
-subtitle: "Proposal"
+title: "Seizures, Fidgets, and Procrastination: Decoding the Brain-Behavior Remix in Epilepsy + ADHD"
+subtitle: "Final Project - Proposal"
 author: 
-  - name: "Team Name - Team member 1, Team member 2,..."
+  - name: "Team O'Dell (the one and solo only)"
     affiliations:
       - name: "College of Information Science, University of Arizona"
-description: "Project description"
+description: "Exploring how seizure-driven brain waves and ADHD-style fidgeting collide—uncovering the neural sparks behind our best procrastination moves."
 format:
   html:
     code-tools: true
@@ -113,6 +113,8 @@ print("Saved preprocessed FIF:", fif_out)
 EOF
 
 # Dataset Descriptions
+
+  Learning to download the seizure dataset to an AWS source. I will include that code in my final project code.
 
 # OBF-Psychiatric Motor Activity Dataset
 
