@@ -112,15 +112,69 @@ raw.save(fif_out, overwrite=True)
 print("Saved preprocessed FIF:", fif_out)
 EOF
 
+# Dataset Descriptions
 
-A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.
+# OBF-Psychiatric Motor Activity Dataset
 
-Make sure to load the data and use inline code for some of this information.
+This dataset comes from Simula Research Laboratory via Zenodo and contains minute-by-minute activity recordings for 162 adults, including those diagnosed with ADHD, depression, and schizophrenia, plus healthy controls. Altogether it’s about 1,565 days of data (roughly 4.3 years!). I chose this because it gives me real-world movement patterns for ADHD—perfect for seeing when restlessness spikes or when I (and others) might struggle to sit still during lectures. It’s also small enough (~10 MB) that I can merge all the ADHD files quickly without my laptop melting.
+
+# CHB-MIT Scalp EEG Database
+
+Hosted on PhysioNet, this classic epilepsy dataset includes continuous scalp EEG recordings from 23 subjects (mostly kids and teens) with a total of 950+ hours and 182 annotated seizures. Each recording is in EDF format at 256 Hz across 22–36 channels. I picked CHB-MIT because it’s the “hello world” of seizure data—tons of examples, straightforward format, and lots of community code I can borrow. It’ll let me explore brain-wave patterns right before seizures and compare them to ADHD movement data.
+
+***pythonThe data coding is above the description.
 
 ## Questions
 
-The two questions you want to answer.
+1. Do adults with epilepsy fidget or move around more like someone with ADHD compared to folks without epilepsy?
+
+    I want to see if people who have seizures also show that classic “can’t sit still” energy we see in ADHD—using the motor activity data, I’ll compare how much and how often epilepsy patients move versus control subjects.
+
+2. Can we spot EEG brain-wave patterns in epilepsy patients that predict when they’ll get restless or hyperactive, like ADHD symptoms?
+
+    I’m curious if specific brain-wave changes—like spikes in theta or shifts in beta power—happen right before someone with epilepsy starts acting restless. By matching EEG features to activity bursts, we can test if the brain signals actually predict ADHD-style behavior.
+
+3. Is there a secret “epilepsy + ADHD = Procrastination Masterclass” going on?
+
+    I’m curious whether people with both epilepsy and ADHD not only fidget more but also show longer “inactive” gaps in their motor or EEG data—kind of like data-driven proof that they’ve perfected the art of procrastination.
 
 ## Analysis plan
 
--   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
+“Okay, brainiac mode activated—also powered by about three cups of coffee and a pro-level procrastination habit (thanks for accepting my late project, Prof!). Here’s the game plan:
+
+1. Variables We’ve Got 
+
+    Fidget Rate: How many times someone shifts per minute (because chairs hate still humans).
+
+    EEG Band Powers: Delta, theta, alpha, beta, gamma—basically my brain’s DJ playlist.  
+
+2. New Features I’ll Conjure 
+
+    Connectivity Matrices: Fancy jargon for ‘which brain regions are gossiping the most.’ 
+
+    Entropy Measures: Chaos theory applied to your noggin—because why not quantify my mental mayhem? 
+
+    Procrastination Proxy: A cheeky count of gaps in activity or EEG data where I probably went to grab  a snack and let the dachshunds out to use the restroom.  
+
+3. External Data to Bribe Into the Mix
+
+    ADHD Questionnaire Scores: If I can find them, I’ll merge in self-reported restlessness—because self-awareness is half the battle.  
+
+    Seizure Diaries: My own scribbles of ‘oops another one’ timestamps, if available.  
+
+4. My Million-Dollar Hypothesis
+
+    I’m genuinely wondering if the data will show that epilepsy patients are more likely to have ADHD—and therefore have honed their procrastination skills to an art form in the first place.  
+
+5. Modeling Strategy  
+
+    Random Forest: The Swiss Army knife of models—let’s see if it agrees I’m onto something.  
+    Validation: Cross-validation and maybe a prayer to the statistics gods for good luck.
+
+6. Analyis Overview (I added #6 because it felt like an logical overview was missing)
+
+    By the end of this project, I want to have solid, data-driven answers to whether epilepsy and ADHD really do pair up—and whether that combo turns people into world-class procrastinators. I’ll bring together the motor activity and EEG features, build models that can spot restlessness and predict it from brain-wave patterns, and then drill into the results to understand which features matter most. 
+
+    My dream outcome is finding simple “red flags” in the data—like a burst of theta waves or a big drop in activity—that tell us someone’s about to start fidgeting, daydreaming, or hitting that “I’ll do it later” mode. At the end, I want to weave it all into one clear picture: how brain signals and movement patterns team up in epilepsy and ADHD—and what that means for staying focused, bouncing in your seat, and yep, procrastinating.
+
+***If my hunch is right***, we’ll discover that the “epilepsy + ADHD = top-tier procrastinators” club is a real thing—and maybe even explain why I’ve been late on this proposal all along. 🚀”.
